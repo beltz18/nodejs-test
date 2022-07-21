@@ -1,18 +1,12 @@
-require("dotenv").config()
-const port = process.env.PORT
+const express = require('express')
+const app     = express()
 
 module.exports = function () {
-  this.app=() => {
-    const express = require("express")
-    const app     = express()
+  this.app = () => {
+    this.middlewares()
     return app
   },
-  this.middlewares=() => {
-    console.log("sjkadjkas")
-  },
-  this.server=() => {
-    this.app().listen(port, () => {
-      console.log(`server running on port ${port}`)
-    })
+  this.middlewares = () => {
+    app.use(require("./routes"))
   }
 }
