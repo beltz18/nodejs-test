@@ -1,5 +1,6 @@
 require("dotenv").config()
 
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const jsonwebtoken = require('jsonwebtoken')
 const { Router } = require('express')
@@ -18,7 +19,12 @@ router.get(process.env.LOGIN_PATH, async (req,res) => {
   const salt = 10
   
   m = await genHash(pass,salt)
-  res.json({email,hash:m})
+  
+
+  // var token = jwt.sign({ email}, process.env.SECRET_PHRASE);
+  var token = await firma(email)
+  
+  res.json({email,hash:m,token})
 })
 
 async function genHash(pass,salt) {
@@ -29,6 +35,18 @@ async function genHash(pass,salt) {
     })
   })
   return a
+}
+
+async function firma(email) {
+    
+  const b = await new Promise((resolve,reject) => {
+    jwt.sign({ email }, process.env.SECRET_PHRASE, { algorithm: 'RS256' }, function(err, token) {
+      if(err) reject (err)
+      resolve(token)
+    })
+  })
+
+  return b
 }
 
 module.exports = router
