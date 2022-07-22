@@ -19,11 +19,7 @@ router.get(process.env.LOGIN_PATH, async (req,res) => {
   const salt = 10
   
   m = await genHash(pass,salt)
-  
-
-  // var token = jwt.sign({ email}, process.env.SECRET_PHRASE);
-  var token = await firma(email)
-  
+  token = await genToken(email)
   res.json({email,hash:m,token})
 })
 
@@ -37,15 +33,13 @@ async function genHash(pass,salt) {
   return a
 }
 
-async function firma(email) {
-    
+async function genToken(email) {
   const b = await new Promise((resolve,reject) => {
-    jwt.sign({ email }, process.env.SECRET_PHRASE, { algorithm: 'RS256' }, function(err, token) {
+    jwt.sign({ email }, process.env.SECRET_PHRASE, function(err, token) {
       if(err) reject (err)
       resolve(token)
     })
   })
-
   return b
 }
 
