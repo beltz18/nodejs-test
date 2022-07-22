@@ -1,3 +1,4 @@
+// express se debe ejecutar una sola vez
 const express = require('express')
 const app     = express()
 
