@@ -16,7 +16,7 @@ here's ***another*** __paragraph__
   - sub element 2.2
 - element 3
 
-![Alt text](https://www.directoalpaladar.com/recetas-de-legumbres-y-verduras/mazorcas-de-maiz-a-la-plancha-receta)
+![Alt text](https://www.directoalpaladar.com/recetas-de-legumbres-y-verduras/mazorcas-de-maiz-a-la-plancha-receta?raw=true "Title")
 
 ##### Title 5
 ###### Title 6
